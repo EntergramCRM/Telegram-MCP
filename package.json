@@ -1,0 +1,54 @@
+{
+  "name": "@entergram/mcp",
+  "version": "0.1.6",
+  "private": false,
+  "description": "Official Entergram MCP CLI for local MCP hosts with OAuth login, stdio bridging, and host config helpers.",
+  "type": "module",
+  "keywords": [
+    "entergram",
+    "mcp",
+    "model-context-protocol",
+    "oauth",
+    "claude-desktop",
+    "codex",
+    "cursor"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Klegus/entergram-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Klegus/entergram-mcp/issues"
+  },
+  "homepage": "https://github.com/Klegus/entergram-mcp#readme",
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "bin": {
+    "entergram-mcp": "./dist/cli/bin.js"
+  },
+  "files": [
+    "dist/cli",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "cli": "node dist/cli/bin.js",
+    "dev:cli": "tsx src/cli/bin.ts serve",
+    "pack:dry-run": "npm pack --dry-run",
+    "prepublishOnly": "npm run build && npm run typecheck && npm run smoke:cli",
+    "smoke:cli": "node dist/cli/bin.js help && node dist/cli/bin.js print-config --format toml --env dev --client-id entergram-smoke-client --name entergram-dev > /dev/null",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.29.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.6.0",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  }
+}
