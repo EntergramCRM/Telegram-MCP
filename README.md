@@ -22,6 +22,31 @@ then acts as a local `stdio` bridge and handles:
 - Client ID Metadata Document (CIMD) when you provide a metadata document URL
 - local `stdio` bridging to the hosted Entergram MCP gateway
 
+## Default Gateway URL
+
+The production MCP gateway URL is intentionally built into this client:
+
+```text
+https://mcp.entergram.com/mcp
+```
+
+That URL is the stable public entrypoint for Entergram's hosted MCP server. The
+client uses it by default so users do not need to copy environment-specific
+configuration just to connect.
+
+You can still override it for development or testing:
+
+```bash
+entergram-mcp print-config --gateway-url https://devmcp.entergram.com/mcp
+entergram-mcp login --gateway-url https://devmcp.entergram.com/mcp
+```
+
+Or with an environment variable:
+
+```bash
+ENTERGRAM_MCP_GATEWAY_URL=https://devmcp.entergram.com/mcp entergram-mcp serve
+```
+
 ## Install
 
 ```bash
@@ -54,6 +79,9 @@ claude mcp add --transport http entergram https://mcp.entergram.com/mcp
 Then run the host's MCP login flow, for example `/mcp` in Claude Code or
 `codex mcp login entergram` in Codex.
 
+The npm package is not required for this primary path. It is a helper and
+fallback for hosts that need a local command.
+
 You can print the same config from the helper:
 
 ```bash
@@ -61,6 +89,8 @@ entergram-mcp print-config --format toml --name entergram
 ```
 
 ### Fallback: local stdio bridge
+
+Use this only when the MCP host cannot connect to remote HTTP MCP directly.
 
 ```bash
 entergram-mcp login
