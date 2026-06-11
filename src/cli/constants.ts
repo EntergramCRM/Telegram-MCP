@@ -1,4 +1,4 @@
-export const CLI_VERSION = "0.1.0";
+export const CLI_VERSION = "0.1.7";
 
 export const DEFAULT_WORKSPACE_SCOPE =
   "workspace.read members.read accounts.read contacts.read chats.read chats.write messages.read messages.write custom_fields.read custom_fields.write tickets.read tickets.write offline_access";

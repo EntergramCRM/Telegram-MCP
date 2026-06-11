@@ -9,6 +9,7 @@ import {
   buildHostConfigSnippet,
   buildHostConfigToml,
   HostConfigFormat,
+  HostConfigTransport,
 } from "./print-config.js";
 import { EntergramRemoteClient } from "./remote-client.js";
 import { EntergramSessionStore } from "./session-store.js";
@@ -21,16 +22,19 @@ Usage:
   entergram-mcp login
   entergram-mcp whoami
   entergram-mcp logout
-  entergram-mcp print-config [--name entergram]
+  entergram-mcp print-config [--name entergram] [--transport http|stdio]
 
 Flags:
   --env dev|production
   --gateway-url https://custom.example.com/mcp
+  --auth-mode auto|preconfigured|dcr|cimd
   --client-id entergram-mcp-cli
+  --client-metadata-url https://example.com/oauth-client-metadata.json
   --scope "workspace.read ..."
   --callback-port 8787
   --config-dir /custom/path
   --format json|toml
+  --transport http|stdio
 `);
 }
 
@@ -49,6 +53,25 @@ function getConfigFormat(flags: Record<string, boolean | string>): HostConfigFor
   }
 
   throw new Error(`Unsupported Entergram MCP config format: ${value}`);
+}
+
+function getConfigTransport(
+  flags: Record<string, boolean | string>,
+): HostConfigTransport {
+  const value = flags.transport;
+  if (value === undefined) {
+    return "http";
+  }
+
+  if (typeof value !== "string") {
+    throw new Error('Expected "--transport" to be either "http" or "stdio".');
+  }
+
+  if (value === "http" || value === "stdio") {
+    return value;
+  }
+
+  throw new Error(`Unsupported Entergram MCP transport: ${value}`);
 }
 
 async function withRemoteClient<T>(
@@ -108,8 +131,9 @@ async function run(): Promise<void> {
     case "logout":
       await withRemoteClient(parsed.flags, async (_client, store) => {
         await store.clear();
+        const clientLabel = config.clientId || config.clientMetadataUrl || config.authMode;
         process.stdout.write(
-          `Cleared local Entergram MCP session for ${config.environment} (${config.clientId}).\n`,
+          `Cleared local Entergram MCP session for ${config.environment} (${clientLabel}).\n`,
         );
       });
       return;
@@ -119,13 +143,14 @@ async function run(): Promise<void> {
           ? parsed.flags.name.trim()
           : "entergram";
       const format = getConfigFormat(parsed.flags);
+      const transport = getConfigTransport(parsed.flags);
 
       if (format === "toml") {
-        process.stdout.write(buildHostConfigToml(config, configuredName));
+        process.stdout.write(buildHostConfigToml(config, configuredName, transport));
         return;
       }
 
-      const snippet = buildHostConfigSnippet(config, configuredName);
+      const snippet = buildHostConfigSnippet(config, configuredName, transport);
       process.stdout.write(`${JSON.stringify(snippet, null, 2)}\n`);
       return;
     }

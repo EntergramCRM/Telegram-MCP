@@ -50,8 +50,11 @@ export async function startLocalBridge(config: CliRuntimeConfig): Promise<void> 
     await remoteClient.connect({ interactive: false });
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
+    const loginHint = config.clientId
+      ? `entergram-mcp login --env ${config.environment} --client-id ${config.clientId}`
+      : `entergram-mcp login --env ${config.environment} --auth-mode ${config.authMode}`;
     throw new Error(
-      `Entergram MCP bridge could not connect to the remote gateway. Run "entergram-mcp login --env ${config.environment} --client-id ${config.clientId}" first, then restart your MCP host. Original error: ${message}`,
+      `Entergram MCP bridge could not connect to the remote gateway. Run "${loginHint}" first, then restart your MCP host. Original error: ${message}`,
     );
   }
 

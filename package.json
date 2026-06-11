@@ -1,6 +1,6 @@
 {
   "name": "@entergram/mcp",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "private": false,
   "description": "Official Entergram MCP CLI for local MCP hosts with OAuth login, stdio bridging, and host config helpers.",
   "type": "module",

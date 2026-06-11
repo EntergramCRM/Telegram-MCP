@@ -1,10 +1,17 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { OAuthDiscoveryState } from "@modelcontextprotocol/sdk/client/auth.js";
-import { OAuthTokens } from "@modelcontextprotocol/sdk/shared/auth.js";
+import {
+  OAuthClientInformationMixed,
+  OAuthTokens,
+} from "@modelcontextprotocol/sdk/shared/auth.js";
+import { OAuthRegistrationMode } from "./config.js";
 
 export type StoredSession = {
-  clientId: string;
+  authMode?: OAuthRegistrationMode;
+  clientId?: string;
+  clientInformation?: OAuthClientInformationMixed;
+  clientMetadataUrl?: string;
   codeVerifier?: string;
   discoveryState?: OAuthDiscoveryState;
   expectedState?: string;
