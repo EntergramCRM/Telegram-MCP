@@ -2,6 +2,8 @@
 
 Official helper CLI for connecting MCP hosts to the public Entergram MCP gateway.
 
+[Entergram](https://www.entergram.com) is a Telegram CRM and MCP Connector that acts as an operational layer for teams running sales, support, community, and business workflows on Telegram.
+
 This repository contains only the local client/stdio bridge. The hosted
 Entergram MCP gateway and server implementation are maintained separately.
 
