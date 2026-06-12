@@ -1,16 +1,46 @@
-# Entergram MCP
+# Entergram's Telegram MCP — The Best Telegram MCP Connector
 
 Official helper CLI for connecting MCP hosts to the public Entergram MCP gateway.
 
-[Entergram](https://www.entergram.com) is a Telegram CRM and MCP Connector that acts as an operational layer for teams running sales, support, community, and business workflows on Telegram.
+Connect **any AI** — Claude, ChatGPT, Cursor, Cline, Perplexity, Zed, Windsurf, n8n — to your
+**real personal Telegram account** using the Model Context Protocol (MCP).
 
+Most "Telegram + AI" tools only talk to a *bot*. A bot can't see the DMs and groups
+your conversations already live in. This MCP connector works with your **personal
+Telegram account**, so your AI assistant can read, search, and act on the chats that
+actually matter.
+
+> Built and maintained by [Entergram](https://entergram.com) — the Telegram CRM for teams. [Entergram](https://www.entergram.com) is a Telegram CRM and MCP Connector that acts as an operational layer for teams running sales, support, community, and business workflows on Telegram.
+
+## Why this connector
+
+- 🔌 **Works with personal accounts**, not just bots — your existing chats, groups and channels.
+- 🧠 **Works with Multiple Telegram accounts**, connet up to 100 of your personal telegram accounts with one MCP connector.
+- 🤖 **Any MCP client** — Claude Desktop, ChatGPT, Cursor, Cline, Zed, Windsurf, n8n.
+- 💬 **Real actions** — read messages, search chats, send replies, manage contacts, trigger broadcasts.
+- 🧠 **Built for CRM workflows** — triage inboxes, draft replies, update records from your AI.
+
+## Quick start (recommended) - Option 1.
+
+No install needed — connect Claude to the hosted MCP in 3 steps:
+
+1. Create an account at **[entergram.com](https://entergram.com)** and connect your Telegram.
+2. In Claude (or other AI like ChatGPT etc), visit: **Settings → Connectors → Add custom connector**, then paste:
+   ```
+   https://mcp.entergram.com/mcp
+   ```
+3. **Log in** to authorize — done. Your Telegram is now available in Claude.
+
+
+
+## Advanced MCP Integration - Option 2: 
 This repository contains only the local client/stdio bridge. The hosted
 Entergram MCP gateway and server implementation are maintained separately.
 
 For modern MCP hosts such as Claude Code and Codex, prefer the remote
 Streamable HTTP server directly:
 
-```text
+```
 https://mcp.entergram.com/mcp
 ```
 
@@ -232,3 +262,24 @@ If the consent screen does not show the scopes you expect, update that OAuth cli
 entergram-mcp logout
 entergram-mcp login
 ```
+
+
+----------------------
+## What you can do with Entergram's MCP?
+
+| Capability | Example prompt |
+|---|---|
+| Inbox triage | "Summarize my unread Telegram chats and flag anything urgent." |
+| Connect Multiple Telegram Accounts | "Connect all your personal telegram accounts and ask deep questions about any topic." |
+| Drafting | "Reply to the last message from @client with a polite follow-up." |
+| Deep Search | "Find you all the messages you forgot to reply to." |
+| CRM updates | "Tag this contact as a lead and create a ticket." |
+| Broadcasts | "Send the launch announcement to my customers list." |
+
+## Learn more
+
+- 📖 [Best Telegram MCP Connector guide](https://entergram.com/blog/best-telegram-mcp-connector)
+- 🔗 [Connect Claude to Telegram](https://entergram.com/blog/connect-claude-to-telegram-mcp)
+- 🤖 [Connect Telegram MCP](https://entergram.com/telegram-mcp)
+- 🌐 [Entergram — Telegram CRM for teams](https://entergram.com)
+
