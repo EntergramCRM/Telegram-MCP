@@ -40,7 +40,7 @@
     "dev:cli": "tsx src/cli/bin.ts serve",
     "pack:dry-run": "npm pack --dry-run",
     "prepublishOnly": "npm run build && npm run typecheck && npm run smoke:cli",
-    "smoke:cli": "node dist/cli/bin.js help && node dist/cli/bin.js print-config --format toml --env dev --client-id entergram-smoke-client --name entergram-dev > /dev/null",
+    "smoke:cli": "node dist/cli/bin.js help && node dist/cli/bin.js print-config --format toml --env dev --client-id entergram-smoke-client --name entergram-dev",
     "typecheck": "tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {
